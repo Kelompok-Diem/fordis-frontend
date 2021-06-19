@@ -17,7 +17,7 @@ export default class Register extends React.Component {
         </Link>
         <Formik
           initialValues={{
-            fullName: "",
+            full_name: "",
             email:"",
             password: "",
           }}
@@ -29,7 +29,7 @@ export default class Register extends React.Component {
         >
           <Form>
             <TextInput
-              name="fullName"
+              name="full_name"
               label="Full Name"
               type="text"
             />

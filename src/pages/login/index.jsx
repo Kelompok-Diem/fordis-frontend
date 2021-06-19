@@ -10,7 +10,7 @@ export default class Login extends React.Component {
     return (
       <Container>
         <p>Login Page</p>
-        <Link to="/home">
+        <Link to="/">
           <Button variant="primary">
             Home
           </Button>

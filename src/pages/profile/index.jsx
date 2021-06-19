@@ -16,8 +16,6 @@ export default class Home extends React.Component {
   async componentDidMount() {
     const profile = await getProfile();
 
-    console.log(profile);
-
     this.setState({
       profile: profile,
     })
@@ -27,7 +25,7 @@ export default class Home extends React.Component {
     return (
       <Container>
         <p>Profile Page</p>
-        <Link to="/home">
+        <Link to="/">
           <Button variant="primary">
             Home
           </Button>
@@ -35,7 +33,7 @@ export default class Home extends React.Component {
         {this.state.profile
           ? (
             <Container>
-              <p>Full Name: {this.state.profile.fullName}</p>
+              <p>Full Name: {this.state.profile.full_name}</p>
               <p>Email: {this.state.profile.email}</p>
             </Container>
           ) : (
