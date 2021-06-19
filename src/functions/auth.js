@@ -21,7 +21,7 @@ export const login = (params) => {
 
 export const getProfile = async () => {
     try {
-        const result = await axios.post(process.env.REACT_APP_API_URL + "/profile", {}, getAuthHeader());
+        const result = await axios.get(process.env.REACT_APP_API_URL + "/profile", getAuthHeader());
 
         return result.data;
     } catch(err) {
