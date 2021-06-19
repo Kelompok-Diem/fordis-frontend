@@ -4,6 +4,7 @@ import Home from './pages/home';
 import Register from './pages/register';
 import Login from './pages/login';
 import Profile from './pages/profile';
+import Post from './pages/post';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         </Route>
         <Route path="/profile">
           <Profile />
+        </Route>
+        <Route exact path="/post/:id" render={(props) => <Post {...props} />}>
         </Route>
         <Route path="/">
           <Home />
