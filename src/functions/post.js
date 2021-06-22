@@ -30,3 +30,13 @@ export const createPost = (params) => {
         console.error(err);
     })
 }
+
+export const vote = (type, post_id) => {
+    axios.put(process.env.REACT_APP_API_URL + "/post/vote/" + type + "/" + post_id, {}, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    })
+}

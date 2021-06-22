@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './comment_form';
+import Vote from './vote';
 import Loading from '../../components/loading';
 
 import { getPostById } from '../../functions/post';
@@ -42,6 +43,10 @@ export default class Post extends React.Component {
             <Container>
               <p><b>{this.state.post.title}</b></p>
               <p>{this.state.post.content}</p>
+              <Vote
+                votes={this.state.post.votes}
+                postId={this.props.match.params.id}
+              />
             </Container>
           ) : (
             <Loading />
