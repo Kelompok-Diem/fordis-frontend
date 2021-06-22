@@ -11,6 +11,16 @@ export const getAllPosts = async () => {
     }
 }
 
+export const getPostById = async (id) => {
+    try {
+        const res = await axios.get(process.env.REACT_APP_API_URL + "/post/" + id);
+
+        return res.data;
+    } catch(err) {
+        console.error(err);
+    }
+}
+
 export const createPost = (params) => {
     axios.post(process.env.REACT_APP_API_URL + "/post", params, getAuthHeader()).then((res) => {
         console.info(res);

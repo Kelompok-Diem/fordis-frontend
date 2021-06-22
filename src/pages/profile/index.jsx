@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Loading from '../../components/loading';
 import { getProfile } from '../../functions/auth';
 
-export default class Home extends React.Component {
+export default class Profile extends React.Component {
   constructor(props) {
     super(props);
 
