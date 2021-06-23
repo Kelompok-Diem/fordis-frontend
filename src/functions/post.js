@@ -30,3 +30,15 @@ export const createPost = (params) => {
         console.error(err);
     })
 }
+
+export const share = (post_id, title) => {
+    navigator.clipboard.writeText("Check " + title + " in ForDis.\n" + window.location.href);
+
+    axios.put(process.env.REACT_APP_API_URL + "/post/share/" + post_id, {}, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    })
+}

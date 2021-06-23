@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './comment_form';
+import Share from './share';
 import Loading from '../../components/loading';
 
 import { getPostById } from '../../functions/post';
@@ -13,7 +14,7 @@ export default class Post extends React.Component {
 
     this.state = {
       post: null,
-      commetns: null,
+      comments: null,
     }
   }
 
@@ -42,6 +43,11 @@ export default class Post extends React.Component {
             <Container>
               <p><b>{this.state.post.title}</b></p>
               <p>{this.state.post.content}</p>
+              <Share
+                postId={this.props.match.params.id}
+                shareCount={this.state.post.share_count}
+                title={this.state.post.title}
+              />
             </Container>
           ) : (
             <Loading />
