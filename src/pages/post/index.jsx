@@ -3,6 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './comment_form';
 import Share from './share';
+import Vote from './vote';
 import Loading from '../../components/loading';
 
 import { getPostById } from '../../functions/post';
@@ -47,6 +48,10 @@ export default class Post extends React.Component {
                 postId={this.props.match.params.id}
                 shareCount={this.state.post.share_count}
                 title={this.state.post.title}
+              />
+              <Vote
+                votes={this.state.post.votes}
+                postId={this.props.match.params.id}
               />
             </Container>
           ) : (
