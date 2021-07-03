@@ -5,6 +5,7 @@ import CommentForm from './comment_form';
 import Share from './share';
 import Vote from './vote';
 import Loading from '../../components/loading';
+import ImageGallery from '../../components/image_gallery';
 
 import { getPostById } from '../../functions/post';
 import { getCommentsByPostId } from '../../functions/comment';
@@ -44,6 +45,11 @@ export default class Post extends React.Component {
             <Container>
               <p><b>{this.state.post.title}</b></p>
               <p>{this.state.post.content}</p>
+              <ImageGallery
+                images={this.state.post.images.map((value) => {
+                  return (process.env.REACT_APP_IMAGE_DIR_URL + "/" + value)
+                })}
+              />
               <Share
                 postId={this.props.match.params.id}
                 shareCount={this.state.post.share_count}
