@@ -3,7 +3,7 @@ import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { TextInput } from '../../components/input/text';
-import { register } from '../../functions/auth';
+import { login, register } from '../../functions/auth';
 
 export default class Register extends React.Component {
   render() {
@@ -22,9 +22,10 @@ export default class Register extends React.Component {
             password: "",
           }}
           onSubmit={(values) => {
-            console.log(values);
-
             register(values);
+            login(values);
+
+            this.props.history.push("/");
           }}
         >
           <Form>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import PostForm from './post_form';
 import Post from './post';
 import Loading from '../../components/loading';
@@ -19,28 +19,28 @@ export default class Home extends React.Component {
   async componentDidMount() {
     this.setState({
       posts: await getAllPosts()
-    }, () => console.log(this.state.posts));
+    });
   }
 
   render() {
     return (
       <Container>
         <p>Home Page</p>
-        <Link to="/register">
+        <NavLink to="/register">
           <Button variant="primary">
             Register
           </Button>
-        </Link>
-        <Link to="/login">
+        </NavLink>
+        <NavLink to="/login">
           <Button variant="primary">
             Login
           </Button>
-        </Link>
-        <Link to="/profile">
+        </NavLink>
+        <NavLink to="/profile">
           <Button variant="primary">
             Profile
           </Button>
-        </Link>
+        </NavLink>
         <PostForm />
         {this.state.posts
           ? (

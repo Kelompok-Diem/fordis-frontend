@@ -10,11 +10,9 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/register">
-          <Register />
+        <Route exact path="/register" render={(props) => <Register {...props} />}>
         </Route>
-        <Route path="/login">
-          <Login />
+        <Route exact path="/login" render={(props) => <Login {...props} />}>
         </Route>
         <Route path="/profile">
           <Profile />

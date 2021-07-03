@@ -21,9 +21,9 @@ export default class Login extends React.Component {
             password: "",
           }}
           onSubmit={(values) => {
-            console.log(values);
-
             login(values);
+
+            this.props.history.push("/");
           }}
         >
           <Form>
