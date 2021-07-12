@@ -47,7 +47,7 @@ export default class Post extends React.Component {
               <p>{this.state.post.content}</p>
               <ImageGallery
                 images={this.state.post.images.map((value) => {
-                  return (process.env.REACT_APP_IMAGE_DIR_URL + "/" + value)
+                  return (process.env.REACT_APP_API_URL + "/images/" + value)
                 })}
               />
               <Share
