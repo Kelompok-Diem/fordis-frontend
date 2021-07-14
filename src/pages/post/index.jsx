@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './comment_form';
+import Comment from './comment';
 import Share from './share';
 import Vote from './vote';
 import Loading from '../../components/loading';
@@ -71,7 +72,10 @@ export default class Post extends React.Component {
           ? (
             this.state.comments.map((value, index) => {
               return (
-                <p key={index}>{value.content}</p>
+                <Comment
+                  key={index}
+                  {...value}
+                />
               )
             })
           ) : (

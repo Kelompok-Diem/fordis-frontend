@@ -6,7 +6,12 @@ export default class Post extends React.Component {
   render() {
     return (
       <Container>
-        <NavLink to={"/post/" + this.props._id}><p><b>{this.props.title}</b></p></NavLink>
+        <NavLink to={"/post/" + this.props._id}>
+            <p>
+              <b>{this.props.title}
+            </b>
+          </p>
+        </NavLink>
         <p>{this.props.content}</p>
       </Container>
     );

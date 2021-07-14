@@ -33,7 +33,7 @@ export default class PostForm extends React.Component {
           }}
         >
           {({ values, setFieldValue }) => (
-            <Form encType='multipart/form-data'>
+            <Form encType="multipart/form-data">
               <TextInput
                 name="title"
                 label="Title"
