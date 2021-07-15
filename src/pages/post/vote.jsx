@@ -6,10 +6,14 @@ export default class Vote extends React.Component {
   render() {
     return (
       <Container>
-        <Button onClick={() => vote("1", this.props.postId)}>
+        <Button onClick={() => vote(
+          this.props.collection, "1", this.props.targetId
+        )}>
           Upvote
         </Button>
-        <Button onClick={() => vote("-1", this.props.postId)}>
+        <Button onClick={() => vote(
+          this.props.collection, "-1", this.props.targetId
+        )}>
           Downvote
         </Button>
         <p>

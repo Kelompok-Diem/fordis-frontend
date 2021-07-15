@@ -53,8 +53,16 @@ export const deactivate = (post_id) => {
     })
 }
 
-export const vote = (type, post_id) => {
-    axios.put(process.env.REACT_APP_API_URL + "/post/vote/" + type + "/" + post_id, {}, getAuthHeader()).then((res) => {
+export const vote = (collection, type, target_id) => {
+    axios.put(
+        process.env.REACT_APP_API_URL + "/"
+            + collection + "/"
+            + "vote/"
+            + type + "/"
+            + target_id,
+        {},
+        getAuthHeader()
+    ).then((res) => {
         console.info(res);
 
         window.location.reload();
