@@ -8,7 +8,7 @@ import Vote from './vote';
 import Loading from '../../components/loading';
 import ImageGallery from '../../components/image_gallery';
 
-import { getPostById } from '../../functions/post';
+import { getPostById, deactivate } from '../../functions/post';
 import { getCommentsByPostId } from '../../functions/comment';
 
 export default class Post extends React.Component {
@@ -51,6 +51,12 @@ export default class Post extends React.Component {
                   return (process.env.REACT_APP_API_URL + "/images/" + value)
                 })}
               />
+              <Button 
+                variant="primary" 
+                onClick={() => deactivate(this.state.post._id)}
+              >
+                Deactivate
+              </Button>
               <Share
                 postId={this.props.match.params.id}
                 shareCount={this.state.post.share_count}
@@ -65,9 +71,11 @@ export default class Post extends React.Component {
             <Loading />
           )
         }
-        <CommentForm
-          postId={this.props.match.params.id}
-        />
+        {this.state.post && this.state.post.is_active && (
+          <CommentForm
+            postId={this.props.match.params.id}
+          />
+        )}
         {this.state.comments
           ? (
             this.state.comments.map((value, index) => {
