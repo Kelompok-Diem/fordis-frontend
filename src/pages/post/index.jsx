@@ -51,8 +51,8 @@ export default class Post extends React.Component {
                   return (process.env.REACT_APP_API_URL + "/images/" + value)
                 })}
               />
-              <Button 
-                variant="primary" 
+              <Button
+                variant="primary"
                 onClick={() => deactivate(this.state.post._id)}
               >
                 Deactivate
@@ -63,8 +63,9 @@ export default class Post extends React.Component {
                 title={this.state.post.title}
               />
               <Vote
+                collection="post"
                 votes={this.state.post.votes}
-                postId={this.props.match.params.id}
+                targetId={this.props.match.params.id}
               />
             </Container>
           ) : (
