@@ -2,9 +2,11 @@ import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import CommentForm from './comment_form';
+import Comment from './comment';
 import Share from './share';
 import Vote from './vote';
 import Loading from '../../components/loading';
+import ImageGallery from '../../components/image_gallery';
 
 import { getPostById, deactivate } from '../../functions/post';
 import { getCommentsByPostId } from '../../functions/comment';
@@ -44,6 +46,11 @@ export default class Post extends React.Component {
             <Container>
               <p><b>{this.state.post.title}</b></p>
               <p>{this.state.post.content}</p>
+              <ImageGallery
+                images={this.state.post.images.map((value) => {
+                  return (process.env.REACT_APP_API_URL + "/images/" + value)
+                })}
+              />
               <Button 
                 variant="primary" 
                 onClick={() => deactivate(this.state.post._id)}
@@ -73,7 +80,10 @@ export default class Post extends React.Component {
           ? (
             this.state.comments.map((value, index) => {
               return (
-                <p key={index}>{value.content}</p>
+                <Comment
+                  key={index}
+                  {...value}
+                />
               )
             })
           ) : (
