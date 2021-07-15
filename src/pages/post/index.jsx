@@ -1,10 +1,10 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import CommentForm from './comment_form';
 import Comment from './comment';
 import Share from './share';
 import Vote from './vote';
+import Page from '../../components/page';
 import Loading from '../../components/loading';
 import ImageGallery from '../../components/image_gallery';
 
@@ -35,12 +35,7 @@ export default class Post extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Link to="/">
-          <Button variant="primary">
-            Home
-          </Button>
-        </Link>
+      <Page>
         {this.state.post
           ? (
             <Container>
@@ -91,7 +86,7 @@ export default class Post extends React.Component {
             <Loading />
           )
         }
-      </Container>
+      </Page>
     );
   }
 }

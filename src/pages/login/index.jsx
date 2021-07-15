@@ -1,20 +1,15 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import { Formik, Form } from 'formik';
+import Page from '../../components/page';
 import { TextInput } from '../../components/input/text';
+
 import { login } from '../../functions/auth';
 
 export default class Login extends React.Component {
   render() {
     return (
-      <Container>
-        <p>Login Page</p>
-        <Link to="/">
-          <Button variant="primary">
-            Home
-          </Button>
-        </Link>
+      <Page>
         <Formik
           initialValues={{
             email:"",
@@ -42,7 +37,7 @@ export default class Login extends React.Component {
             </Button>
           </Form>
         </Formik>
-      </Container>
+      </Page>
     )
   }
 }

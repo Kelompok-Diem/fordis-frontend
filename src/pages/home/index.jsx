@@ -1,8 +1,7 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 import PostForm from './post_form';
 import Post from './post';
+import Page from '../../components/page';
 import Loading from '../../components/loading';
 
 import { getAllPosts } from '../../functions/post';
@@ -24,23 +23,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Container>
-        <p>Home Page</p>
-        <NavLink to="/register">
-          <Button variant="primary">
-            Register
-          </Button>
-        </NavLink>
-        <NavLink to="/login">
-          <Button variant="primary">
-            Login
-          </Button>
-        </NavLink>
-        <NavLink to="/profile">
-          <Button variant="primary">
-            Profile
-          </Button>
-        </NavLink>
+      <Page>
         <PostForm />
         {this.state.posts
           ? (
@@ -56,7 +39,7 @@ export default class Home extends React.Component {
             <Loading />
           )
         }
-      </Container>
+      </Page>
     )
   }
 }

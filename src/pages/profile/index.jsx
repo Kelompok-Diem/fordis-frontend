@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
+import Page from '../../components/page';
 import Loading from '../../components/loading';
+
 import { getProfile } from '../../functions/auth';
 
 export default class Profile extends React.Component {
@@ -23,13 +24,7 @@ export default class Profile extends React.Component {
 
   render() {
     return (
-      <Container>
-        <p>Profile Page</p>
-        <Link to="/">
-          <Button variant="primary">
-            Home
-          </Button>
-        </Link>
+      <Page>
         {this.state.profile
           ? (
             <Container>
@@ -40,7 +35,7 @@ export default class Profile extends React.Component {
             <Loading />
           )
         }
-      </Container>
+      </Page>
     )
   }
 }
