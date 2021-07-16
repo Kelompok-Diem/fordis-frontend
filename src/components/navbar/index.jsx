@@ -4,6 +4,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 import { getProfile } from '../../functions/auth';
 
+import './style.scss';
 import Logo from '../../assets/images/logo.png';
 
 const NavigationBarRouter = withRouter(props => <NavigationBar {...props} />);
@@ -28,7 +29,7 @@ class NavigationBar extends React.Component {
 
     return (
       <Navbar
-        style={style.main}
+        className="navbar"
         expand="lg"
         sticky="top"
         bg="light"
@@ -39,19 +40,25 @@ class NavigationBar extends React.Component {
               <Image
                 alt=""
                 src={Logo}
-                style={style.logo}
+                width="45%"
               />
             </NavLink>
           </Navbar.Brand>
           {pathname !== "/login" && pathname !== "/register" && (
             this.state.profile ? (
-              <NavLink to="/profile">
-                <p style={style.profile}><b>{this.state.profile.full_name}</b></p>
-                <p style={style.profile}>{this.state.profile.email}</p>
+              <NavLink
+                className="navigator profile-container"
+                to="/profile"
+              >
+                <p className="profile name">{this.state.profile.full_name}</p>
+                <p className="profile">{this.state.profile.email}</p>
               </NavLink>
             ) : (
               <Navbar.Collapse className="justify-content-end">
-                <NavLink to="/login">
+                <NavLink
+                  to="/login"
+                  className="login-button"
+                >
                   <Button variant="outline-primary">
                     Login
                   </Button>
@@ -68,20 +75,6 @@ class NavigationBar extends React.Component {
       </Navbar>
     )
   }
-}
-
-const style = {
-  main: {
-    height: "60px"
-  },
-  logo: {
-    width: "45%"
-  },
-  profile: {
-    margin: 0,
-    textDecoration: "none",
-    color: "black"
-  },
 }
 
 export default NavigationBarRouter;

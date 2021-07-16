@@ -1,0 +1,18 @@
+@import '../../App.scss';
+
+.navbar {
+	height: "60px";
+	.profile-container {
+		text-align: right;
+		.profile {
+			margin: 0;
+			font-weight: 300;
+			&.name {
+				font-weight: bold;
+			}
+		}
+	}
+	.login-button {
+		margin-right: 10px;
+	}
+}

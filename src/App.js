@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import NavigationBar from './components/navbar';
 import Home from './pages/home';
@@ -6,6 +5,8 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Profile from './pages/profile';
 import Post from './pages/post';
+
+import './App.scss';
 
 function App() {
   return (
