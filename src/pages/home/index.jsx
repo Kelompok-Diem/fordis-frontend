@@ -23,8 +23,7 @@ export default class Home extends React.Component {
 
   render() {
     return (
-      <Page>
-        <PostForm />
+      <Page className="main">
         {this.state.posts
           ? (
             this.state.posts.map((value, index) => {
