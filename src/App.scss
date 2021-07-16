@@ -1,6 +1,8 @@
+@import './color.scss';
+
 .navigator, .navigator:hover {
 	text-decoration: none;
-	color: black;
+	color: $black;
 }
 
 .auth-page {

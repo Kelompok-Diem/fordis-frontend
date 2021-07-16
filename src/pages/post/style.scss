@@ -1,0 +1,46 @@
+@import '../../App.scss';
+
+.post-container {
+	background-color: $grey;
+	padding: 30px;
+	.content-row {
+		margin-bottom: 20px;
+		.author {
+			margin-bottom: 0px;
+		}
+	}
+	.stats-container {
+		background-color: $dark-grey;
+		.stat-row {
+			padding: 10px 0px;
+			div.stat {
+				margin: auto 0px;
+			}
+		}
+	}
+}
+
+.vote-container {
+	text-align: center;
+	button.vote-button {
+		background-color: transparent;
+		border: none;
+		padding: 0;
+		&:active, &:hover {
+			.upvote-icon {
+				color: $green;
+			}
+			.downvote-icon {
+				color: $red;
+			}
+		}
+	}
+	.vote-count {
+		margin-bottom: 0;
+	}
+}
+
+.three-dots-container, .three-dots-container:hover {
+	text-decoration: none;
+	color: $black;
+}

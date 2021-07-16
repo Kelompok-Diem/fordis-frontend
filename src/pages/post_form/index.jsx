@@ -12,16 +12,12 @@ import './style.scss';
 
 export default class PostForm extends React.Component {
   render() {
-    console.log(this.props);
-
     return (
       <Page>
         <Container className="top-button-container">
-          <NavLink to="/">
-            <Button>
-              {"< Back"}
-            </Button>
-          </NavLink>
+          <Button onClick={() => this.props.history.goBack()}>
+            {"< Back"}
+          </Button>
         </Container>
         <Container className="post-form-container">
           <Formik
