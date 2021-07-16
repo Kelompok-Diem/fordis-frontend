@@ -1,5 +1,6 @@
 import React from 'react';
-import PostForm from './post_form';
+import { Container, Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import Post from './post';
 import Page from '../../components/page';
 import Loading from '../../components/loading';
@@ -22,8 +23,19 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const jwt_token = sessionStorage.getItem("user_token");
+
     return (
-      <Page className="main">
+      <Page>
+        <Container className="top-button-container menu-container">
+          {jwt_token && (
+            <NavLink to="add-post">
+              <Button>
+                + New
+              </Button>
+            </NavLink>
+          )}
+        </Container>
         {this.state.posts
           ? (
             this.state.posts.map((value, index) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useField } from 'formik';
-import { Form } from 'react-bootstrap';
+import { Form, Container } from 'react-bootstrap';
 import ImageGallery from '../image_gallery';
 
 export const ImageInput = ({ label, ...props }) => {
@@ -14,12 +14,14 @@ export const ImageInput = ({ label, ...props }) => {
     <Form.Group>
       <Form.Label>{label}</Form.Label>
       <ImageGallery images={images} />
-      <input
-        type="file"
-        name={props.name}
-        accept="image/*"
-        onChange={props.onChange}
-      />
+      <Container>
+        <input
+          type="file"
+          name={props.name}
+          accept="image/*"
+          onChange={props.onChange}
+        />
+      </Container>
     </Form.Group>
   );
 }
