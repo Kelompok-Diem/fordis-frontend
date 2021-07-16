@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 import Post from './post';
 import Page from '../../components/page';
-import Loading from '../../components/loading';
 
 import { getAllPosts } from '../../functions/post';
 
@@ -47,7 +47,10 @@ export default class Home extends React.Component {
               )
             })
           ) : (
-            <Loading />
+            <Container>
+              <h3><Skeleton /></h3>
+              <Skeleton count={5} />
+            </Container>
           )
         }
       </Page>

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Button, Row, Col } from 'react-bootstrap';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import PostContent from './post';
 import CommentForm from './comment_form';
 import Comment from './comment';
 import Page from '../../components/page';
-import Loading from '../../components/loading';
 
 import { getPostById } from '../../functions/post';
 import { getCommentsByPostId } from '../../functions/comment';
@@ -34,7 +34,6 @@ export default class Post extends React.Component {
   }
 
   render() {
-
     return (
       <Page>
         <Container className="top-button-container">
@@ -47,7 +46,17 @@ export default class Post extends React.Component {
             ? (
               <PostContent {...this.state.post} />
             ) : (
-              <Loading />
+              <Container>
+                <SkeletonTheme color="white">
+                  <Row>
+                    <Col md={4}>
+                      <Skeleton />
+                    </Col>
+                  </Row>
+                  <h3><Skeleton /></h3>
+                  <Skeleton count={5} />
+                </SkeletonTheme>
+              </Container>
             )
           }
         </Container>
@@ -79,7 +88,16 @@ export default class Post extends React.Component {
                 )}
               </>
             ) : (
-              <Loading />
+              <Container>
+                <SkeletonTheme color="white">
+                  <Row>
+                    <Col md={4}>
+                      <Skeleton />
+                    </Col>
+                  </Row>
+                  <Skeleton count={5} />
+                </SkeletonTheme>
+              </Container>
             )
           }
         </Container>
