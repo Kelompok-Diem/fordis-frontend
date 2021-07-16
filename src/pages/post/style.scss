@@ -1,13 +1,14 @@
 @import '../../App.scss';
 
+.author {
+	margin-bottom: 0px;
+}
+
 .post-container {
 	background-color: $grey;
 	padding: 30px;
 	.content-row {
 		margin-bottom: 20px;
-		.author {
-			margin-bottom: 0px;
-		}
 	}
 	.stats-container {
 		background-color: $dark-grey;
@@ -17,6 +18,29 @@
 				margin: auto 0px;
 			}
 		}
+	}
+}
+
+.comment-section {
+	background-color: $grey;
+	margin-top: 35px;
+	padding: 20px;
+	.title-container {
+		margin-top: 15px;
+		text-align: center;
+		.discussion-title {
+			font-weight: bold;
+		}
+	}
+	.comment-form-container {
+		.button-container {
+			text-align: right;
+		}
+	}
+	.comment-container {
+		background-color: $white;
+		padding: 20px;
+		margin-top: 30px;
 	}
 }
 

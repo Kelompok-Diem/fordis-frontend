@@ -9,7 +9,7 @@ import { createComment } from '../../functions/comment';
 export default class CommentForm extends React.Component {
   render() {
     return (
-      <Container>
+      <Container className="comment-form-container">
         <Formik
           initialValues={{
             content: "",
@@ -58,9 +58,11 @@ export default class CommentForm extends React.Component {
                   setFieldValue("images", images);
                 }}
               />
-              <Button variant="primary" type="submit">
-                Comment
-              </Button>
+              <Container className="button-container">
+                <Button variant="primary" type="submit">
+                  Comment
+                </Button>
+              </Container>
             </Form>
           )}
         </Formik>

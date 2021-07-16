@@ -42,32 +42,47 @@ export default class Post extends React.Component {
             {"< Back"}
           </Button>
         </Container>
-        {this.state.post
-          ? (
-            <PostContent {...this.state.post} />
-          ) : (
-            <Loading />
-          )
-        }
-        {this.state.post && this.state.post.is_active && (
-          <CommentForm
-            postId={this.props.match.params.id}
-          />
-        )}
-        {this.state.comments
-          ? (
-            this.state.comments.map((value, index) => {
-              return (
-                <Comment
-                  key={index}
-                  {...value}
-                />
-              )
-            })
-          ) : (
-            <Loading />
-          )
-        }
+        <Container className="post-container">
+          {this.state.post
+            ? (
+              <PostContent {...this.state.post} />
+            ) : (
+              <Loading />
+            )
+          }
+        </Container>
+        <Container className="comment-section">
+          {this.state.post && this.state.post.is_active && (
+            <CommentForm
+              postId={this.props.match.params.id}
+            />
+          )}
+          {this.state.comments
+            ? (
+              <>
+                <Container className="title-container">
+                  <h2 className="discussion-title">Discussion</h2>
+                </Container>
+                {this.state.comments.length > 0 ? (
+                  this.state.comments.map((value, index) => {
+                    return (
+                      <Comment
+                        key={index}
+                        {...value}
+                      />
+                    )
+                  })
+                ) : (
+                  this.state.post.is_active && (
+                    <p>There are no comments here. Be the first to comment</p>
+                  )
+                )}
+              </>
+            ) : (
+              <Loading />
+            )
+          }
+        </Container>
       </Page>
     );
   }

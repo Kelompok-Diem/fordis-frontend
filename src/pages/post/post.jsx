@@ -21,7 +21,7 @@ export default class PostContent extends React.Component {
     ]
 
     return (
-      <Container className="post-container">
+      <>
         <Row className="content-row">
           <Col md={1}>
             <Vote
@@ -96,7 +96,7 @@ export default class PostContent extends React.Component {
             </Row>
           </Col>
         </Row>
-      </Container>
+      </>
     );
   }
 }
