@@ -31,3 +31,7 @@ export const getProfile = async () => {
         console.error(err);
     }
 }
+
+export const logOut = () => {
+    sessionStorage.removeItem("user_token");
+}

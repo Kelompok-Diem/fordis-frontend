@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 import Vote from './vote';
-import Menu from './menu';
+import Menu from '../../components/menu';
 import EditCommentModal from './edit_comment_modal';
 import ImageGallery from '../../components/image_gallery';
 import DeleteModal from '../../components/delete_modal';

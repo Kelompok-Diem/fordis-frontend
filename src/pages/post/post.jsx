@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Dropdown } from 'react-bootstrap';
 import { ChatLeftFill, Share } from 'react-bootstrap-icons';
 import Vote from './vote';
-import Menu from './menu';
+import Menu from '../../components/menu';
 import ImageGallery from '../../components/image_gallery';
 import DeleteModal from '../../components/delete_modal';
 

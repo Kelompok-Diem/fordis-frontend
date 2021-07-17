@@ -1,13 +1,14 @@
 import React from 'react';
-import { Container, Row, Col, Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
 import { Formik, Form } from 'formik';
+import Skeleton from 'react-loading-skeleton';
 import Page from '../../components/page';
-import Loading from '../../components/loading';
+import Menu from '../../components/menu';
 import { TextInput } from '../../components/input/text';
 import { RadioGroup } from '../../components/input/radio_group';
 import { SingleImageInput } from '../../components/input/image';
 
-import { getProfile } from '../../functions/auth';
+import { getProfile, logOut } from '../../functions/auth';
 
 import './style.scss';
 
@@ -29,6 +30,8 @@ export default class Profile extends React.Component {
   }
 
   render() {
+    console.log(this.props);
+
     return (
       <Page>
         <h1 className="title">Profile</h1>
@@ -57,7 +60,7 @@ export default class Profile extends React.Component {
                           onChange={(e) => setFieldValue("photo", e.currentTarget.files[0])}
                         />
                       </Col>
-                      <Col md={8}>
+                      <Col md={7}>
                         <TextInput
                           name="full_name"
                           label="Full Name"
@@ -108,6 +111,37 @@ export default class Profile extends React.Component {
                           ]}
                         />
                       </Col>
+                      <Col md={1}>
+                        <Menu>
+                          <Dropdown.Item
+                            eventKey={1}
+                          >
+                            Report
+                          </Dropdown.Item>
+                          <Dropdown.Divider />
+                          <Dropdown.Item
+                            eventKey={2}
+                          >
+                            Promote
+                          </Dropdown.Item>
+                          <Dropdown.Item
+                            eventKey={3}
+                          >
+                            Delete
+                          </Dropdown.Item>
+                          <Dropdown.Divider />
+                          <Dropdown.Item
+                            eventKey={4}
+                            onClick={() => {
+                              logOut();
+                              this.props.history.push("/");
+                              window.location.reload();
+                            }}
+                          >
+                            Log Out
+                          </Dropdown.Item>
+                        </Menu>
+                      </Col>
                     </Row>
                     <Container
                       className="button-container"
@@ -132,7 +166,14 @@ export default class Profile extends React.Component {
               </Formik>
             </Container>
           ) : (
-            <Loading />
+            <Row>
+              <Col md={4}>
+                <Skeleton height={200} />
+              </Col>
+              <Col md={7}>
+                <Skeleton count={5} />
+              </Col>
+            </Row>
           )
         }
       </Page>

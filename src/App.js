@@ -18,8 +18,7 @@ function App() {
         </Route>
         <Route exact path="/login" render={(props) => <Login {...props} />}>
         </Route>
-        <Route path="/profile">
-          <Profile />
+        <Route exact path="/profile" render={(props) => <Profile {...props} />}>
         </Route>
         <Route exact path="/post/:id" render={(props) => <Post {...props} />}>
         </Route>
