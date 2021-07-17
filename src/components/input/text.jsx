@@ -13,6 +13,7 @@ export const TextInput = ({label, ...props}) => {
       <Form.Control
         {...field}
         {...props}
+        className={props.disabled ? "disabled-form" : ""}
       />
     </Form.Group>
   );

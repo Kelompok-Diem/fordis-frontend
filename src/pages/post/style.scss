@@ -2,6 +2,11 @@
 
 .author {
 	margin-bottom: 0px;
+	a, a:hover {
+		text-decoration: none;
+		font-weight: bold;
+		color: $black;
+	}
 }
 
 .post-container {

@@ -48,7 +48,7 @@ class NavigationBar extends React.Component {
             this.state.profile ? (
               <NavLink
                 className="navigator profile-container"
-                to="/profile"
+                to={"/profile/" + this.state.profile._id}
               >
                 <p className="profile name">{this.state.profile.full_name}</p>
                 <p className="profile">{this.state.profile.email}</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Dropdown } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import Vote from './vote';
 import Menu from '../../components/menu';
 import EditCommentModal from './edit_comment_modal';
@@ -44,7 +45,14 @@ export default class Comment extends React.Component {
             />
           </Col>
           <Col md={10}>
-            <p className="author">Comment By <b>{this.props.author}</b></p>
+            <p className="author">
+              Posted By{" "}
+              <NavLink
+                to={"/profile/" + this.props.author._id}
+              >
+                {this.props.author.full_name}
+              </NavLink>
+            </p>
             <p>{this.props.content}</p>
             <ImageGallery
               images={this.props.images.map((value) => {

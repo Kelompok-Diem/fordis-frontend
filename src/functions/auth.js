@@ -32,6 +32,26 @@ export const getProfile = async () => {
     }
 }
 
+export const getUser = async (user_id) => {
+    try {
+        const result = await axios.get(process.env.REACT_APP_API_URL + "/auth/" + user_id, getAuthHeader());
+
+        return result.data;
+    } catch(err) {
+        console.error(err);
+    }
+}
+
+export const updateUser = async (params) => {
+    axios.put(process.env.REACT_APP_API_URL + "/auth/update/", params, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
 export const logOut = () => {
     sessionStorage.removeItem("user_token");
 }

@@ -21,6 +21,7 @@ export const RadioGroup = ({ label, ...props }) => {
                     type="radio"
                     name={props.name}
                     value={option.value}
+                    disabled={props.disabled}
                   />
                 </span>
                 <FormControl

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col, Dropdown } from 'react-bootstrap';
 import { ChatLeftFill, Share } from 'react-bootstrap-icons';
+import { NavLink } from 'react-router-dom';
 import Vote from './vote';
 import Menu from '../../components/menu';
 import ImageGallery from '../../components/image_gallery';
@@ -51,7 +52,14 @@ export default class PostContent extends React.Component {
             />
           </Col>
           <Col md={10}>
-            <p className="author">Posted By <b>{this.props.author}</b></p>
+            <p className="author">
+              Posted By{" "}
+              <NavLink
+                to={"/profile/" + this.props.author._id}
+              >
+                {this.props.author.full_name}
+              </NavLink>
+            </p>
             <h3><b>{this.props.title}</b></h3>
             <p>{this.props.content}</p>
             <ImageGallery

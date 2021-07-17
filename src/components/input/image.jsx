@@ -40,11 +40,14 @@ export const SingleImageInput = ({ ...props }) => {
 
   return (
     <Form.Group className="single-image-input">
-      <button className="image-container">
+      <button
+        className="image-container"
+        disabled={props.disabled}
+      >
         <Image
           src={image_source}
           width="100%"
-          onClick={() => document.getElementById("image-selector").click()}
+          onClick={() => props.disabled ? console.log() : document.getElementById("image-selector").click()}
         />
       </button>
       <input
