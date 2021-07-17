@@ -3,11 +3,28 @@ import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 import Vote from './vote';
 import Menu from './menu';
 import ImageGallery from '../../components/image_gallery';
+import DeleteModal from '../../components/delete_modal';
+
+import { deleteComment } from '../../functions/comment';
 
 export default class Comment extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      show_modal: false
+    }
+  }
+
   render() {
     return (
       <Container className="comment-container">
+        <DeleteModal
+          show={this.state.show_modal}
+          type="comment"
+          hideModal={() => this.setState({ show_modal: false })}
+          action={() => deleteComment(this.props._id)}
+        />
         <Row>
           <Col md={1}>
             <Vote
@@ -53,6 +70,7 @@ export default class Comment extends React.Component {
                     <Dropdown.Divider />
                     <Dropdown.Item
                       eventKey="3"
+                      onClick={() => this.setState({ show_modal: true })}
                     >
                       Delete
                     </Dropdown.Item>

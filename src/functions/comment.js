@@ -20,3 +20,13 @@ export const createComment = (params) => {
         console.error(err);
     })
 }
+
+export const deleteComment = (comment_id) => {
+    axios.delete(process.env.REACT_APP_API_URL + "/comment/delete/" + comment_id, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}

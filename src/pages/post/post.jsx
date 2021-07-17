@@ -1,13 +1,22 @@
 import React from 'react';
-import { Container, Row, Col, Dropdown } from 'react-bootstrap';
+import { Row, Col, Dropdown } from 'react-bootstrap';
 import { ChatLeftFill, Share } from 'react-bootstrap-icons';
 import Vote from './vote';
 import Menu from './menu';
 import ImageGallery from '../../components/image_gallery';
+import DeleteModal from '../../components/delete_modal';
 
-import { deactivate, share } from '../../functions/post';
+import { deactivate, share, deletePost } from '../../functions/post';
 
 export default class PostContent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      show_modal: false
+    }
+  }
+
   render() {
     const stats = [
       {
@@ -22,6 +31,15 @@ export default class PostContent extends React.Component {
 
     return (
       <>
+        <DeleteModal
+          show={this.state.show_modal}
+          type="post"
+          hideModal={() => this.setState({ show_modal: false })}
+          action={() => {
+            deletePost(this.props._id);
+            this.props.history.push("/");
+          }}
+        />
         <Row className="content-row">
           <Col md={1}>
             <Vote
@@ -82,6 +100,7 @@ export default class PostContent extends React.Component {
                     <Dropdown.Divider />
                     <Dropdown.Item
                       eventKey="5"
+                      onClick={() => this.setState({ show_modal: true })}
                     >
                       Delete
                     </Dropdown.Item>

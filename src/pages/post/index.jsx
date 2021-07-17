@@ -44,7 +44,10 @@ export default class Post extends React.Component {
         <Container className="post-container">
           {this.state.post
             ? (
-              <PostContent {...this.state.post} />
+              <PostContent
+                {...this.state.post}
+                history={this.props.history}
+              />
             ) : (
               <Container>
                 <SkeletonTheme color="white">
