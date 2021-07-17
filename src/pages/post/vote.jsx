@@ -13,7 +13,7 @@ export default class Vote extends React.Component {
         <Row>
           <Col md={12}>
             <button
-              className="vote-button"
+              className={"vote-button" + (this.props.upvoted ? " voted" : "")}
               onClick={() => vote(
                 this.props.collection, "1", this.props.targetId
               )}
@@ -35,7 +35,7 @@ export default class Vote extends React.Component {
         <Row>
           <Col md={12}>
             <button
-              className="vote-button"
+              className={"vote-button" + (this.props.downvoted ? " voted" : "")}
               onClick={() => vote(
                 this.props.collection, "-1", this.props.targetId
               )}

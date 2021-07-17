@@ -13,7 +13,7 @@ export const getAllPosts = async () => {
 
 export const getPostById = async (id) => {
     try {
-        const res = await axios.get(process.env.REACT_APP_API_URL + "/post/" + id);
+        const res = await axios.get(process.env.REACT_APP_API_URL + "/post/" + id, getAuthHeader());
 
         return res.data;
     } catch (err) {

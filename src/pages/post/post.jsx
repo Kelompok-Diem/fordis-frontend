@@ -28,10 +28,12 @@ export default class PostContent extends React.Component {
               collection="post"
               votes={this.props.votes}
               targetId={this.props._id}
+              upvoted={this.props.user && this.props.user.upvoted}
+              downvoted={this.props.user && this.props.user.downvoted}
             />
           </Col>
           <Col md={10}>
-            <p className="author">Posted By <b>Muntu</b></p>
+            <p className="author">Posted By <b>{this.props.author}</b></p>
             <h3><b>{this.props.title}</b></h3>
             <p>{this.props.content}</p>
             <ImageGallery
@@ -48,29 +50,44 @@ export default class PostContent extends React.Component {
               >
                 Share
               </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="2"
-              >
-                Report
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item
-                eventKey="3"
-                onClick={() => deactivate(this.props._id)}
-              >
-                Deactivate
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="4"
-              >
-                Edit
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item
-                eventKey="5"
-              >
-                Delete
-              </Dropdown.Item>
+              {this.props.user && (
+                <Dropdown.Item
+                  eventKey="2"
+                >
+                  Report
+                </Dropdown.Item>
+              )}
+              {this.props.user && this.props.user.is_author && (
+                <>
+                  <Dropdown.Divider />
+                  {this.props.is_active && (
+                    <Dropdown.Item
+                      eventKey="3"
+                      onClick={() => deactivate(this.props._id)}
+                    >
+                      Deactivate
+                    </Dropdown.Item>
+                  )}
+                  <Dropdown.Item
+                    eventKey="4"
+                  >
+                    Edit
+                  </Dropdown.Item>
+                </>
+              )}
+              {this.props.user &&
+                (this.props.user.is_author || this.props.user.is_admin || this.props.user.is_moderator) &&
+                (
+                  <>
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      eventKey="5"
+                    >
+                      Delete
+                    </Dropdown.Item>
+                  </>
+                )
+              }
             </Menu>
           </Col>
         </Row>

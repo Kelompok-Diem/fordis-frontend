@@ -14,10 +14,12 @@ export default class Comment extends React.Component {
               collection="comment"
               votes={this.props.votes}
               targetId={this.props._id}
+              upvoted={this.props.user && this.props.user.upvoted}
+              downvoted={this.props.user && this.props.user.downvoted}
             />
           </Col>
           <Col md={10}>
-            <p className="author">Comment By <b>Muntu</b></p>
+            <p className="author">Comment By <b>{this.props.author}</b></p>
             <p>{this.props.content}</p>
             <ImageGallery
               images={this.props.images.map((value) => {
@@ -27,23 +29,36 @@ export default class Comment extends React.Component {
           </Col>
           <Col md={1}>
             <Menu>
-              <Dropdown.Item
-                eventKey="1"
-              >
-                Report
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item
-                eventKey="1"
-              >
-                Edit
-              </Dropdown.Item>
-              <Dropdown.Divider />
-              <Dropdown.Item
-                eventKey="3"
-              >
-                Delete
-              </Dropdown.Item>
+              {this.props.user && (
+                <Dropdown.Item
+                  eventKey="1"
+                >
+                  Report
+                </Dropdown.Item>
+              )}
+              {this.props.user && this.props.user.is_author && (
+                <>
+                  <Dropdown.Divider />
+                  <Dropdown.Item
+                    eventKey="1"
+                  >
+                    Edit
+                  </Dropdown.Item>
+                </>
+              )}
+              {this.props.user &&
+                (this.props.user.is_author || this.props.user.is_admin || this.props.user.is_moderator) &&
+                (
+                  <>
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      eventKey="3"
+                    >
+                      Delete
+                    </Dropdown.Item>
+                  </>
+                )
+              }
             </Menu>
           </Col>
         </Row>

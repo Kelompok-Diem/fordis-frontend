@@ -50,7 +50,7 @@
 		background-color: transparent;
 		border: none;
 		padding: 0;
-		&:active, &:hover {
+		&:active, &:hover, &.voted {
 			.upvote-icon {
 				color: $green;
 			}
