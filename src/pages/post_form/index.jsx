@@ -1,17 +1,25 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { Formik, Form } from 'formik';
-import { NavLink } from 'react-router-dom';
 import Page from '../../components/page';
 import { TextInput } from '../../components/input/text';
 import { ImageInput } from '../../components/input/image';
 
-import { createPost } from '../../functions/post';
+import { createPost, updatePost } from '../../functions/post';
 
 import './style.scss';
 
 export default class PostForm extends React.Component {
   render() {
+    const is_edit = this.props.location.state ? true : false;
+    const initialValues = is_edit
+      ? this.props.location.state.initialValues
+      : {
+        title: "",
+        content: "",
+        images: [],
+      };
+
     return (
       <Page>
         <Container className="top-button-container">
@@ -21,11 +29,7 @@ export default class PostForm extends React.Component {
         </Container>
         <Container className="post-form-container">
           <Formik
-            initialValues={{
-              title: "",
-              content: "",
-              images: [],
-            }}
+            initialValues={initialValues}
             onSubmit={(values) => {
               const formData = new FormData();
 
@@ -39,8 +43,12 @@ export default class PostForm extends React.Component {
                 }
               }
 
-              createPost(formData);
-              this.props.history.push("/");
+              if (is_edit) {
+                updatePost(this.props.match.params.id, values);
+              } else {
+                createPost(formData);
+              }
+              this.props.history.goBack();
             }}
           >
             {({ values, setFieldValue }) => (
@@ -57,22 +65,24 @@ export default class PostForm extends React.Component {
                   as="textarea"
                   row={5}
                 />
-                <ImageInput
-                  name="image"
-                  images={values.images}
-                  onChange={(e) => {
-                    let images = values.images;
+                {!is_edit && (
+                  <ImageInput
+                    name="image"
+                    images={values.images}
+                    onChange={(e) => {
+                      let images = values.images;
 
-                    if (e.currentTarget.files[0]) {
-                      images.push(e.currentTarget.files[0]);
-                    }
+                      if (e.currentTarget.files[0]) {
+                        images.push(e.currentTarget.files[0]);
+                      }
 
-                    setFieldValue("images", images);
-                  }}
-                />
+                      setFieldValue("images", images);
+                    }}
+                  />
+                )}
                 <Container className="button-container">
                   <Button variant="primary" type="submit">
-                    Post
+                    {is_edit ? "Edit" : "Post"}
                   </Button>
                 </Container>
               </Form>

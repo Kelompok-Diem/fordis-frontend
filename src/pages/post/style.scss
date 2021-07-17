@@ -32,15 +32,16 @@
 			font-weight: bold;
 		}
 	}
-	.comment-form-container {
-		.button-container {
-			text-align: right;
-		}
-	}
 	.comment-container {
 		background-color: $white;
 		padding: 20px;
 		margin-top: 30px;
+	}
+}
+
+.comment-form-container {
+	.button-container {
+		text-align: right;
 	}
 }
 

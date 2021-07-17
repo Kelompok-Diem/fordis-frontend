@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, Dropdown } from 'react-bootstrap';
 import Vote from './vote';
 import Menu from './menu';
+import EditCommentModal from './edit_comment_modal';
 import ImageGallery from '../../components/image_gallery';
 import DeleteModal from '../../components/delete_modal';
 
@@ -12,17 +13,24 @@ export default class Comment extends React.Component {
     super(props);
 
     this.state = {
-      show_modal: false
+      show_edit_modal: false,
+      show_delete_modal: false,
     }
   }
 
   render() {
     return (
       <Container className="comment-container">
+        <EditCommentModal
+          show={this.state.show_edit_modal}
+          hideModal={() => this.setState({ show_edit_modal: false })}
+          content={this.props.content}
+          comment_id={this.props._id}
+        />
         <DeleteModal
-          show={this.state.show_modal}
+          show={this.state.show_delete_modal}
           type="comment"
-          hideModal={() => this.setState({ show_modal: false })}
+          hideModal={() => this.setState({ show_delete_modal: false })}
           action={() => deleteComment(this.props._id)}
         />
         <Row>
@@ -58,6 +66,7 @@ export default class Comment extends React.Component {
                   <Dropdown.Divider />
                   <Dropdown.Item
                     eventKey="1"
+                    onClick={() => this.setState({ show_edit_modal: true })}
                   >
                     Edit
                   </Dropdown.Item>
@@ -70,7 +79,7 @@ export default class Comment extends React.Component {
                     <Dropdown.Divider />
                     <Dropdown.Item
                       eventKey="3"
-                      onClick={() => this.setState({ show_modal: true })}
+                      onClick={() => this.setState({ show_delete_modal: true })}
                     >
                       Delete
                     </Dropdown.Item>

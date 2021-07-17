@@ -71,6 +71,16 @@ export const vote = (collection, type, target_id) => {
     })
 }
 
+export const updatePost = (post_id, params) => {
+    axios.put(process.env.REACT_APP_API_URL + "/post/update/" + post_id, params, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
 export const deletePost = (post_id) => {
     axios.delete(process.env.REACT_APP_API_URL + "/post/delete/" + post_id, getAuthHeader()).then((res) => {
         console.info(res);

@@ -23,6 +23,8 @@ function App() {
         </Route>
         <Route exact path="/post/:id" render={(props) => <Post {...props} />}>
         </Route>
+        <Route exact path="/edit-post/:id" render={(props) => <PostForm {...props} />}>
+        </Route>
         <Route exact path="/add-post" render={(props) => <PostForm {...props} />}>
         </Route>
         <Route path="/">

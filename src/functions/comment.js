@@ -21,6 +21,16 @@ export const createComment = (params) => {
     })
 }
 
+export const updateComment = (comment_id, params) => {
+    axios.put(process.env.REACT_APP_API_URL + "/comment/update/" + comment_id, params, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
 export const deleteComment = (comment_id) => {
     axios.delete(process.env.REACT_APP_API_URL + "/comment/delete/" + comment_id, getAuthHeader()).then((res) => {
         console.info(res);

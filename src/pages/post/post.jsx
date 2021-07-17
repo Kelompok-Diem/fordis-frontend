@@ -88,6 +88,15 @@ export default class PostContent extends React.Component {
                   )}
                   <Dropdown.Item
                     eventKey="4"
+                    onClick={() => this.props.history.push({
+                      pathname: "/edit-post/" + this.props._id,
+                      state: {
+                        initialValues: {
+                          title: this.props.title,
+                          content: this.props.content
+                        }
+                      }
+                    })}
                   >
                     Edit
                   </Dropdown.Item>
