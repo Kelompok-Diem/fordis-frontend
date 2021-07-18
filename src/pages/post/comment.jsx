@@ -23,7 +23,10 @@ export default class Comment extends React.Component {
 
   render() {
     return (
-      <Container className="comment-container">
+      <Container
+        id={this.props._id}
+        className="comment-container"
+      >
         <ReportModal
           show={this.state.show_report_modal}
           type="comment"

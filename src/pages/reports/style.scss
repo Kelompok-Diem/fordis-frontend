@@ -1,0 +1,11 @@
+@import '../../App.scss';
+
+table.report-table {
+	td {
+		vertical-align: middle;
+		a, a:hover {
+			text-decoration: none;
+			color: black;
+		}
+	}
+}

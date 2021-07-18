@@ -3,7 +3,7 @@ import { getAuthHeader } from './authHeader';
 
 export const getCommentsByPostId = async (post_id) => {
     try {
-        const res = await axios.get(process.env.REACT_APP_API_URL + "/comment/" + post_id, getAuthHeader());
+        const res = await axios.get(process.env.REACT_APP_API_URL + "/comments/" + post_id, getAuthHeader());
 
         return res.data;
     } catch(err) {
