@@ -6,19 +6,22 @@ import Post from './post';
 import Page from '../../components/page';
 
 import { getAllPosts } from '../../functions/post';
+import { getProfile } from '../../functions/auth';
 
 export default class Home extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      posts: null
+      posts: null,
+      profile: null,
     }
   }
 
   async componentDidMount() {
     this.setState({
-      posts: await getAllPosts()
+      posts: await getAllPosts(),
+      profile: await getProfile(),
     });
   }
 
@@ -28,12 +31,24 @@ export default class Home extends React.Component {
     return (
       <Page>
         <Container className="top-button-container menu-container">
-          {jwt_token && (
-            <NavLink to="add-post">
-              <Button>
-                + New
+          {this.state.profile && (
+            <>
+              {(this.state.profile.is_admin || this.state.profile.is_moderator) && (
+                <NavLink
+                  to="/reports"
+                  className="report-button"
+                >
+                  <Button variant="outline-primary">
+                    Reports
+                  </Button>
+                </NavLink>
+              )}
+              <NavLink to="add-post">
+                <Button>
+                  + New
               </Button>
-            </NavLink>
+              </NavLink>
+            </>
           )}
         </Container>
         {this.state.posts

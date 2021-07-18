@@ -6,6 +6,7 @@ import Login from './pages/login';
 import Profile from './pages/profile';
 import Post from './pages/post';
 import PostForm from './pages/post_form';
+import Reports from './pages/reports';
 
 import './App.scss';
 
@@ -25,6 +26,8 @@ function App() {
         <Route exact path="/edit-post/:id" render={(props) => <PostForm {...props} />}>
         </Route>
         <Route exact path="/add-post" render={(props) => <PostForm {...props} />}>
+        </Route>
+        <Route exact path="/reports" render={(props) => <Reports {...props} />}>
         </Route>
         <Route path="/">
           <Home />
