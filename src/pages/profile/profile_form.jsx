@@ -13,30 +13,22 @@ export default class ProfileForm extends React.Component {
     const { user } = this.props;
     const can_edit = user && user.is_owner;
 
-    let initialValues = {};
-    const fields = ["full_name", "email", "gender", "role", "photo"];
-
-    for (const value of fields) {
-      initialValues[value] = this.props[value];
-    }
-
-    console.log(initialValues);
-
     return (
       <Container>
         <Formik
-          initialValues={{
-            ...initialValues,
-            photo: null,
-          }}
+          initialValues={this.props.initialValues}
           onSubmit={(values) => {
-            console.log(values);
+            const formData = new FormData();
 
-            updateUser(values);
+            for (const [key, value] of Object.entries(values)) {
+              formData.append(key, value);
+            }
+
+            updateUser(formData);
           }}
         >
           {({ values, setFieldValue, resetForm }) => (
-            <Form>
+            <Form encType="multipart/form-data">
               <Row>
                 <Col md={4}>
                   <SingleImageInput

@@ -40,7 +40,7 @@ export const SingleImageInput = ({ ...props }) => {
 
   return (
     <Form.Group className="single-image-input">
-      <button
+      <div
         className="image-container"
         disabled={props.disabled}
       >
@@ -49,7 +49,7 @@ export const SingleImageInput = ({ ...props }) => {
           width="100%"
           onClick={() => props.disabled ? console.log() : document.getElementById("image-selector").click()}
         />
-      </button>
+      </div>
       <input
         id="image-selector"
         type="file"

@@ -13,25 +13,55 @@ export default class Profile extends React.Component {
     super(props);
 
     this.state = {
-      profile: null
+      initialValues: null,
+      user: null,
     }
+  }
+
+  async getImageFile(image_url, callback) {
+    if (image_url === null) {
+      callback(null);
+
+      return;
+    }
+
+    await fetch(image_url)
+      .then(async response => {
+        const contentType = response.headers.get('content-type')
+        const blob = await response.blob()
+        const file = new File([blob], "currentImage.jpg", { contentType })
+
+        callback(file);
+      })
   }
 
   async componentDidMount() {
     const profile = await getUser(this.props.match.params.id);
 
+    let initialValues = {};
+    const fields = ["full_name", "email", "gender", "role", "photo"];
+
+    for (const value of fields) {
+      initialValues[value] = profile[value];
+    }
+
+    await this.getImageFile(process.env.REACT_APP_API_URL + "/images/" + profile.photo, (file) => {
+      initialValues.photo = file;
+    });
+
     this.setState({
-      profile: profile,
-    }, () => console.log(this.state.profile))
+      initialValues: initialValues,
+      user: profile.user,
+    })
   }
 
   render() {
     return (
       <Page>
         <h1 className="title">Profile</h1>
-        {this.state.profile
+        {this.state.initialValues
           ? (
-            <ProfileForm {...this.state.profile}/>
+            <ProfileForm {...this.state}/>
           ) : (
             <Row>
               <Col md={4}>

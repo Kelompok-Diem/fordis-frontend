@@ -21,7 +21,7 @@ class NavigationBar extends React.Component {
   async componentDidMount() {
     this.setState({
       profile: await getProfile(),
-    }, () => console.log(this.state));
+    });
   }
 
   render() {
