@@ -52,6 +52,26 @@ export const updateUser = async (params) => {
     });
 }
 
+export const promoteModerator = async(user_id) => {
+    axios.put(process.env.REACT_APP_API_URL + "/auth/moderator/" + user_id, {}, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
+export const deleteUser = (user_id) => {
+    axios.delete(process.env.REACT_APP_API_URL + "/auth/delete/" + user_id, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
 export const logOut = () => {
     sessionStorage.removeItem("user_token");
 }

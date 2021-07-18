@@ -6,7 +6,7 @@ import { TextInput } from '../../components/input/text';
 import { RadioGroup } from '../../components/input/radio_group';
 import { SingleImageInput } from '../../components/input/image';
 
-import { updateUser, logOut } from '../../functions/auth';
+import { updateUser, logOut, promoteModerator, deleteUser } from '../../functions/auth';
 
 export default class ProfileForm extends React.Component {
   render() {
@@ -103,23 +103,27 @@ export default class ProfileForm extends React.Component {
                       </Dropdown.Item>
                     )}
                     {user &&
+                      !this.props.position.is_admin &&
                       (user.is_admin || user.is_moderator) && (
                         <>
                           <Dropdown.Divider />
-                          {user.is_admin && this.props.is_moderator && (
+                          {user.is_admin && !this.props.position.is_moderator && (
                             <Dropdown.Item
                               eventKey={2}
+                              onClick={() => promoteModerator(this.props.initialValues._id)}
                             >
                               Promote
                             </Dropdown.Item>
                           )}
-                          {!this.props.is_admin && (
-                            <Dropdown.Item
-                              eventKey={3}
-                            >
-                              Delete
-                            </Dropdown.Item>
-                          )}
+                          <Dropdown.Item
+                            eventKey={3}
+                            onClick={() => {
+                              deleteUser(this.props.initialValues._id)
+                              this.props.history.push("/");
+                            }}
+                          >
+                            Delete
+                          </Dropdown.Item>
                         </>
                       )
                     }
@@ -141,7 +145,7 @@ export default class ProfileForm extends React.Component {
                   </Menu>
                 </Col>
               </Row>
-              {user && (
+              {user && user.is_owner && (
                 <Container
                   className="button-container"
                   fluid

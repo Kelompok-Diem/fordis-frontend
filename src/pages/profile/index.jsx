@@ -15,6 +15,7 @@ export default class Profile extends React.Component {
     this.state = {
       initialValues: null,
       user: null,
+      position: null,
     }
   }
 
@@ -39,19 +40,27 @@ export default class Profile extends React.Component {
     const profile = await getUser(this.props.match.params.id);
 
     let initialValues = {};
-    const fields = ["full_name", "email", "gender", "role", "photo"];
+    const fields = ["_id", "full_name", "email", "gender", "role"];
 
     for (const value of fields) {
       initialValues[value] = profile[value];
     }
 
-    await this.getImageFile(process.env.REACT_APP_API_URL + "/images/" + profile.photo, (file) => {
-      initialValues.photo = file;
-    });
+    if (profile.photo === null) {
+      initialValues.photo = null;
+    } else {
+      await this.getImageFile(process.env.REACT_APP_API_URL + "/images/" + profile.photo, (file) => {
+        initialValues.photo = file;
+      });
+    }
 
     this.setState({
       initialValues: initialValues,
       user: profile.user,
+      position: {
+        is_admin: profile.is_admin,
+        is_moderator: profile.is_moderator,
+      }
     })
   }
 
@@ -61,7 +70,10 @@ export default class Profile extends React.Component {
         <h1 className="title">Profile</h1>
         {this.state.initialValues
           ? (
-            <ProfileForm {...this.state}/>
+            <ProfileForm
+              {...this.state}
+              history={this.props.history}
+            />
           ) : (
             <Row>
               <Col md={4}>
