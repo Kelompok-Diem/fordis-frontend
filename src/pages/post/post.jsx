@@ -6,6 +6,7 @@ import Vote from './vote';
 import Menu from '../../components/menu';
 import ImageGallery from '../../components/image_gallery';
 import DeleteModal from '../../components/delete_modal';
+import ReportModal from '../../components/report_modal';
 
 import { deactivate, share, deletePost } from '../../functions/post';
 
@@ -14,7 +15,8 @@ export default class PostContent extends React.Component {
     super(props);
 
     this.state = {
-      show_modal: false
+      show_delete_modal: false,
+      show_report_modal: false,
     }
   }
 
@@ -32,10 +34,15 @@ export default class PostContent extends React.Component {
 
     return (
       <>
-        <DeleteModal
-          show={this.state.show_modal}
+        <ReportModal
+          show={this.state.show_report_modal}
           type="post"
-          hideModal={() => this.setState({ show_modal: false })}
+          hideModal={() => this.setState({ show_report_modal: false })}
+        />
+        <DeleteModal
+          show={this.state.show_delete_modal}
+          type="post"
+          hideModal={() => this.setState({ show_delete_modal: false })}
           action={() => {
             deletePost(this.props._id);
             this.props.history.push("/");
@@ -79,6 +86,7 @@ export default class PostContent extends React.Component {
               {this.props.user && (
                 <Dropdown.Item
                   eventKey="2"
+                  onClick={() => this.setState({ show_report_modal: true })}
                 >
                   Report
                 </Dropdown.Item>
@@ -117,7 +125,7 @@ export default class PostContent extends React.Component {
                     <Dropdown.Divider />
                     <Dropdown.Item
                       eventKey="5"
-                      onClick={() => this.setState({ show_modal: true })}
+                      onClick={() => this.setState({ show_delete_modal: true })}
                     >
                       Delete
                     </Dropdown.Item>

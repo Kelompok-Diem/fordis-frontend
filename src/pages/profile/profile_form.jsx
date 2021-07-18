@@ -5,16 +5,41 @@ import Menu from '../../components/menu';
 import { TextInput } from '../../components/input/text';
 import { RadioGroup } from '../../components/input/radio_group';
 import { SingleImageInput } from '../../components/input/image';
+import DeleteModal from '../../components/delete_modal';
+import ReportModal from '../../components/report_modal';
 
 import { updateUser, logOut, promoteModerator, deleteUser } from '../../functions/auth';
 
 export default class ProfileForm extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      show_report_modal: false,
+      show_delete_modal: false,
+    }
+  }
+
   render() {
     const { user } = this.props;
     const can_edit = user && user.is_owner;
 
     return (
       <Container>
+        <ReportModal
+          show={this.state.show_report_modal}
+          type="user"
+          hideModal={() => this.setState({ show_report_modal: false })}
+        />
+        <DeleteModal
+          show={this.state.show_delete_modal}
+          type="user"
+          hideModal={() => this.setState({ show_delete_modal: false })}
+          action={() => {
+            deleteUser(this.props.initialValues._id)
+            this.props.history.push("/");
+          }}
+        />
         <Formik
           initialValues={this.props.initialValues}
           onSubmit={(values) => {
@@ -98,11 +123,12 @@ export default class ProfileForm extends React.Component {
                     {user && (
                       <Dropdown.Item
                         eventKey={1}
+                        onClick={() => this.setState({ show_report_modal: true })}
                       >
                         Report
                       </Dropdown.Item>
                     )}
-                    {user &&
+                    {user && !user.is_owner &&
                       !this.props.position.is_admin &&
                       (user.is_admin || user.is_moderator) && (
                         <>
@@ -115,15 +141,14 @@ export default class ProfileForm extends React.Component {
                               Promote
                             </Dropdown.Item>
                           )}
-                          <Dropdown.Item
-                            eventKey={3}
-                            onClick={() => {
-                              deleteUser(this.props.initialValues._id)
-                              this.props.history.push("/");
-                            }}
-                          >
-                            Delete
-                          </Dropdown.Item>
+                          {!user.is_owner && (
+                            <Dropdown.Item
+                              eventKey={3}
+                              onClick={() => this.setState({ show_delete_modal: true })}
+                            >
+                              Delete
+                            </Dropdown.Item>
+                          )}
                         </>
                       )
                     }
