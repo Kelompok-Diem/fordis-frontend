@@ -27,6 +27,7 @@ export default class Comment extends React.Component {
         <ReportModal
           show={this.state.show_report_modal}
           type="comment"
+          id={this.props._id}
           hideModal={() => this.setState({ show_report_modal: false })}
         />
         <EditCommentModal

@@ -3,6 +3,8 @@ import { Modal, Button } from 'react-bootstrap';
 import { Formik, Form } from 'formik';
 import { TextInput } from '../input/text';
 
+import { createReport } from '../../functions/report';
+
 export default class ReportModal extends React.Component {
   render() {
     return (
@@ -23,7 +25,7 @@ export default class ReportModal extends React.Component {
             reason: "",
           }}
           onSubmit={(values) => {
-            console.log(values);
+            createReport(values, this.props.type, this.props.id);
           }}
         >
           <Form>

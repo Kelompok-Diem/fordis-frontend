@@ -29,6 +29,7 @@ export default class ProfileForm extends React.Component {
         <ReportModal
           show={this.state.show_report_modal}
           type="user"
+          id={this.props.initialValues._id}
           hideModal={() => this.setState({ show_report_modal: false })}
         />
         <DeleteModal

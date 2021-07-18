@@ -37,6 +37,7 @@ export default class PostContent extends React.Component {
         <ReportModal
           show={this.state.show_report_modal}
           type="post"
+          id={this.props._id}
           hideModal={() => this.setState({ show_report_modal: false })}
         />
         <DeleteModal
