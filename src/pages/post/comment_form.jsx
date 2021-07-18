@@ -4,17 +4,23 @@ import { Formik, Form } from 'formik';
 import { TextInput } from '../../components/input/text';
 import { ImageInput } from '../../components/input/image';
 
-import { createComment } from '../../functions/comment';
+import { createComment, updateComment } from '../../functions/comment';
 
 export default class CommentForm extends React.Component {
   render() {
+    const is_edit = this.props.comment_id ? true : false;
+    const initialValues = is_edit
+      ? {
+        content: this.props.content
+      } : {
+        content: "",
+        images: [],
+      }
+
     return (
-      <Container>
+      <Container className="comment-form-container">
         <Formik
-          initialValues={{
-            content: "",
-            images: [],
-          }}
+          initialValues={initialValues}
           onSubmit={(values) => {
             const params = {
               ...values,
@@ -33,34 +39,42 @@ export default class CommentForm extends React.Component {
               }
             }
 
-            createComment(formData);
+            if (is_edit) {
+              updateComment(this.props.comment_id, values);
+            } else {
+              createComment(formData);
+            }
           }}
         >
           {({ values, setFieldValue }) => (
             <Form encType="multipart/form-data">
               <TextInput
                 name="content"
-                label="Add a Comment"
+                label={is_edit ? "" :"Add a Comment"}
                 type="text"
                 as="textarea"
                 row={5}
               />
-              <ImageInput
-                name="image"
-                images={values.images}
-                onChange={(e) => {
-                  let images = values.images;
+              {!is_edit && (
+                <ImageInput
+                  name="image"
+                  images={values.images}
+                  onChange={(e) => {
+                    let images = values.images;
 
-                  if (e.currentTarget.files[0]) {
-                    images.push(e.currentTarget.files[0]);
-                  }
+                    if (e.currentTarget.files[0]) {
+                      images.push(e.currentTarget.files[0]);
+                    }
 
-                  setFieldValue("images", images);
-                }}
-              />
-              <Button variant="primary" type="submit">
-                Comment
-              </Button>
+                    setFieldValue("images", images);
+                  }}
+                />
+              )}
+              <Container className="button-container">
+                <Button variant="primary" type="submit">
+                  {is_edit ? "Edit" : "Comment"}
+                </Button>
+              </Container>
             </Form>
           )}
         </Formik>

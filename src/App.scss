@@ -1,0 +1,33 @@
+@import './color.scss';
+
+.navigator, .navigator:hover {
+	text-decoration: none;
+	color: $black;
+}
+
+.auth-page {
+	.title-container {
+		text-align: center;
+		margin-bottom: 50px;
+		.title {
+			font-weight: bold;
+		}
+	}
+
+	.form-container {
+		padding: 0px 50px;
+	}
+
+	.button-container {
+		text-align: center;
+		margin-top: 50px;
+		.button {
+			width: 20%;
+		}
+	}
+}
+
+.top-button-container {
+	padding: 0px;
+	margin-bottom: 30px;
+}

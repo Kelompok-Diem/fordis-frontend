@@ -1,9 +1,9 @@
 import React from 'react';
 import { Container, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import PostForm from './post_form';
+import Skeleton from 'react-loading-skeleton';
 import Post from './post';
-import Loading from '../../components/loading';
+import Page from '../../components/page';
 
 import { getAllPosts } from '../../functions/post';
 
@@ -23,25 +23,19 @@ export default class Home extends React.Component {
   }
 
   render() {
+    const jwt_token = sessionStorage.getItem("user_token");
+
     return (
-      <Container>
-        <p>Home Page</p>
-        <NavLink to="/register">
-          <Button variant="primary">
-            Register
-          </Button>
-        </NavLink>
-        <NavLink to="/login">
-          <Button variant="primary">
-            Login
-          </Button>
-        </NavLink>
-        <NavLink to="/profile">
-          <Button variant="primary">
-            Profile
-          </Button>
-        </NavLink>
-        <PostForm />
+      <Page>
+        <Container className="top-button-container menu-container">
+          {jwt_token && (
+            <NavLink to="add-post">
+              <Button>
+                + New
+              </Button>
+            </NavLink>
+          )}
+        </Container>
         {this.state.posts
           ? (
             this.state.posts.map((value, index) => {
@@ -53,10 +47,13 @@ export default class Home extends React.Component {
               )
             })
           ) : (
-            <Loading />
+            <Container>
+              <h3><Skeleton /></h3>
+              <Skeleton count={5} />
+            </Container>
           )
         }
-      </Container>
+      </Page>
     )
   }
 }

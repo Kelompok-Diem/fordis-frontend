@@ -1,0 +1,26 @@
+@import '../../App.scss';
+
+textarea.form-control {
+	resize: none;
+}
+
+input.disabled-form.form-control {
+	background-color: $ultra-light-grey;
+}
+
+.custom-radio-group {
+	.input-group-text {
+		background-color: $darker-grey;
+	}
+}
+
+.single-image-input {
+	.image-container {
+		background-color: transparent;
+		border: none;
+		padding: 0;
+	}
+	#image-selector {
+		display: none;
+	}
+}

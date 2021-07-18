@@ -13,7 +13,7 @@ export const getAllPosts = async () => {
 
 export const getPostById = async (id) => {
     try {
-        const res = await axios.get(process.env.REACT_APP_API_URL + "/post/" + id);
+        const res = await axios.get(process.env.REACT_APP_API_URL + "/post/" + id, getAuthHeader());
 
         return res.data;
     } catch (err) {
@@ -69,4 +69,24 @@ export const vote = (collection, type, target_id) => {
     }).catch((err) => {
         console.error(err);
     })
+}
+
+export const updatePost = (post_id, params) => {
+    axios.put(process.env.REACT_APP_API_URL + "/post/update/" + post_id, params, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
+}
+
+export const deletePost = (post_id) => {
+    axios.delete(process.env.REACT_APP_API_URL + "/post/delete/" + post_id, getAuthHeader()).then((res) => {
+        console.info(res);
+
+        window.location.reload();
+    }).catch((err) => {
+        console.error(err);
+    });
 }

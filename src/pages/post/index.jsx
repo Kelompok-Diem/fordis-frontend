@@ -1,15 +1,15 @@
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Container, Button, Row, Col } from 'react-bootstrap';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import PostContent from './post';
 import CommentForm from './comment_form';
 import Comment from './comment';
-import Share from './share';
-import Vote from './vote';
-import Loading from '../../components/loading';
-import ImageGallery from '../../components/image_gallery';
+import Page from '../../components/page';
 
-import { getPostById, deactivate } from '../../functions/post';
+import { getPostById } from '../../functions/post';
 import { getCommentsByPostId } from '../../functions/comment';
+
+import './style.scss';
 
 export default class Post extends React.Component {
   constructor(props) {
@@ -35,63 +35,76 @@ export default class Post extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Link to="/">
-          <Button variant="primary">
-            Home
+      <Page>
+        <Container className="top-button-container">
+          <Button onClick={() => this.props.history.goBack()}>
+            {"< Back"}
           </Button>
-        </Link>
-        {this.state.post
-          ? (
-            <Container>
-              <p><b>{this.state.post.title}</b></p>
-              <p>{this.state.post.content}</p>
-              <ImageGallery
-                images={this.state.post.images.map((value) => {
-                  return (process.env.REACT_APP_API_URL + "/images/" + value)
-                })}
+        </Container>
+        <Container className="post-container">
+          {this.state.post
+            ? (
+              <PostContent
+                {...this.state.post}
+                history={this.props.history}
               />
-              <Button
-                variant="primary"
-                onClick={() => deactivate(this.state.post._id)}
-              >
-                Deactivate
-              </Button>
-              <Share
-                postId={this.props.match.params.id}
-                shareCount={this.state.post.share_count}
-                title={this.state.post.title}
-              />
-              <Vote
-                collection="post"
-                votes={this.state.post.votes}
-                targetId={this.props.match.params.id}
-              />
-            </Container>
-          ) : (
-            <Loading />
-          )
-        }
-        {this.state.post && this.state.post.is_active && (
-          <CommentForm
-            postId={this.props.match.params.id}
-          />
-        )}
-        {this.state.comments
-          ? (
-            this.state.comments.map((value, index) => {
-              return (
-                <Comment
-                  key={index}
-                  {...value}
-                />
-              )
-            })
-          ) : (
-            <Loading />
-          )
-        }
-      </Container>
+            ) : (
+              <Container>
+                <SkeletonTheme color="white">
+                  <Row>
+                    <Col md={4}>
+                      <Skeleton />
+                    </Col>
+                  </Row>
+                  <h3><Skeleton /></h3>
+                  <Skeleton count={5} />
+                </SkeletonTheme>
+              </Container>
+            )
+          }
+        </Container>
+        <Container className="comment-section">
+          {this.state.post && this.state.post.is_active && (
+            <CommentForm
+              postId={this.props.match.params.id}
+            />
+          )}
+          {this.state.comments
+            ? (
+              <>
+                <Container className="title-container">
+                  <h2 className="discussion-title">Discussion</h2>
+                </Container>
+                {this.state.comments.length > 0 ? (
+                  this.state.comments.map((value, index) => {
+                    return (
+                      <Comment
+                        key={index}
+                        {...value}
+                      />
+                    )
+                  })
+                ) : (
+                  this.state.post.is_active && (
+                    <p>There are no comments here. Be the first to comment</p>
+                  )
+                )}
+              </>
+            ) : (
+              <Container>
+                <SkeletonTheme color="white">
+                  <Row>
+                    <Col md={4}>
+                      <Skeleton />
+                    </Col>
+                  </Row>
+                  <Skeleton count={5} />
+                </SkeletonTheme>
+              </Container>
+            )
+          }
+        </Container>
+      </Page>
     );
   }
 }
