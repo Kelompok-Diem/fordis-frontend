@@ -6,6 +6,7 @@ import Menu from '../../components/menu';
 import EditCommentModal from './edit_comment_modal';
 import ImageGallery from '../../components/image_gallery';
 import DeleteModal from '../../components/delete_modal';
+import ReportModal from '../../components/report_modal';
 
 import { deleteComment } from '../../functions/comment';
 
@@ -16,12 +17,22 @@ export default class Comment extends React.Component {
     this.state = {
       show_edit_modal: false,
       show_delete_modal: false,
+      show_report_modal: false,
     }
   }
 
   render() {
     return (
-      <Container className="comment-container">
+      <Container
+        id={this.props._id}
+        className="comment-container"
+      >
+        <ReportModal
+          show={this.state.show_report_modal}
+          type="comment"
+          id={this.props._id}
+          hideModal={() => this.setState({ show_report_modal: false })}
+        />
         <EditCommentModal
           show={this.state.show_edit_modal}
           hideModal={() => this.setState({ show_edit_modal: false })}
@@ -65,6 +76,7 @@ export default class Comment extends React.Component {
               {this.props.user && (
                 <Dropdown.Item
                   eventKey="1"
+                  onClick={() => this.setState({ show_report_modal: true })}
                 >
                   Report
                 </Dropdown.Item>

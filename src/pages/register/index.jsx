@@ -23,7 +23,6 @@ export default class Register extends React.Component {
           }}
           onSubmit={(values) => {
             register(values);
-            login(values);
 
             this.props.history.push("/");
           }}

@@ -5,7 +5,7 @@ export const register = (params) => {
     axios.post(process.env.REACT_APP_API_URL + "/auth/register", params).then((res) => {
         console.info(res);
 
-        window.location.reload();
+        login(params);
     }).catch((err) => {
         console.error(err);
     })
